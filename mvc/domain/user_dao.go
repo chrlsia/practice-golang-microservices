@@ -1,8 +1,9 @@
 package domain
 
 import (
-	"errors"
 	"fmt"
+	"github.com/chrlsia/practice-golang-microservices/mvc/utils"
+	"net/http"
 )
 
 var users = map[int64]*User{
@@ -10,12 +11,16 @@ var users = map[int64]*User{
 		Id: 1, FirstName: "Federico", LastName: "Leon", Email: "myemail@gmail.com"},
 }
 
-func GetUser(UserId int64) (*User, error) {
+func GetUser(UserId int64) (*User, *utils.ApplicationError) {
 
 	if user := users[UserId]; user != nil {
 		return user, nil
 
 	}
-	return nil, errors.New(fmt.Sprintf("user %v was not found", UserId))
+	return nil, &utils.ApplicationError{
+		Message:    fmt.Sprintf("user %v was not found", UserId),
+		StatusCode: http.StatusNotFound,
+		Code:       "not found",
+	}
 
 }
