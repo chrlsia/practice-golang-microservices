@@ -8,7 +8,7 @@ import (
 
 var users = map[int64]*User{
 	123: {
-		Id: 1, FirstName: "Federico", LastName: "Leon", Email: "myemail@gmail.com"},
+		Id: 123, FirstName: "Federico", LastName: "Leon", Email: "myemail@gmail.com"},
 }
 
 func GetUser(UserId int64) (*User, *utils.ApplicationError) {

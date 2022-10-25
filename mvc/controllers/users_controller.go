@@ -9,6 +9,7 @@ import (
 )
 
 func GetUser(resp http.ResponseWriter, req *http.Request) {
+	//Sto req, sto URL,Query() kai Get("user_id")
 	userId, err := strconv.ParseInt(req.URL.Query().Get("user_id"), 10, 64)
 
 	if err != nil {
@@ -25,6 +26,11 @@ func GetUser(resp http.ResponseWriter, req *http.Request) {
 	}
 
 	user, apiErr := services.GetUser(userId)
+	//apiErr einai enaw pointer
+	//ara exei ennoia na einai nil
+	//epeomnvw mporv na to sygkrinv sthn epomenh entolh me nill
+	//kai aytow einai o logow poy to pernav vw pointer
+	//stiw diaforew functions
 	if apiErr != nil {
 		jsonValue, _ := json.Marshal(apiErr)
 		resp.WriteHeader(apiErr.StatusCode)
