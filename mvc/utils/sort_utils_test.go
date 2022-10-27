@@ -76,3 +76,10 @@ func BenchmarkBubbleSort1000(b *testing.B) { //pop up suggestion cause is the on
 		BubbleSort(els)
 	}
 }
+
+func BenchmarkBubbleSort100000(b *testing.B) { //pop up suggestion cause is the only one exported
+	els := getElements(100000)
+	for i := 0; i < b.N; i++ {
+		BubbleSort(els)
+	}
+}
