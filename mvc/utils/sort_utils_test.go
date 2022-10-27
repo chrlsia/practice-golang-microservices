@@ -7,7 +7,7 @@ import (
 
 func TestBubbleSort(t *testing.T) {
 	els := []int{9, 8, 7, 6, 5}
-	els = BubbleSort(els)
+	BubbleSort(els)
 
 	assert.NotNil(t, els)
 	assert.EqualValues(t, 5, len(els))
