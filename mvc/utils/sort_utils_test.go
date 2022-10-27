@@ -2,6 +2,7 @@ package utils
 
 import (
 	"github.com/stretchr/testify/assert"
+	"sort"
 	"testing"
 )
 
@@ -66,20 +67,73 @@ func TestGetElements(t *testing.T) {
 func BenchmarkBubbleSort10(b *testing.B) { //pop up suggestion cause is the only one exported
 	els := getElements(10)
 	for i := 0; i < b.N; i++ {
-		BubbleSort(els)
+		BubbleSort(els) //8.986 ns/op
+	}
+}
+
+func BenchmarkSort10(b *testing.B) { //pop up suggestion cause is the only one exported
+	els := getElements(10)
+	for i := 0; i < b.N; i++ {
+		//sort function for  []int
+		sort.Ints(els) //~ 251.3 ns/op
 	}
 }
 
 func BenchmarkBubbleSort1000(b *testing.B) { //pop up suggestion cause is the only one exported
 	els := getElements(1000)
 	for i := 0; i < b.N; i++ {
-		BubbleSort(els)
+		BubbleSort(els) // 690.6 ns/op
+	}
+}
+
+func BenchmarkSort1000(b *testing.B) { //pop up suggestion cause is the only one exported
+	els := getElements(1000)
+	for i := 0; i < b.N; i++ {
+		sort.Ints(els) //47054 ns/op
+	}
+}
+
+func BenchmarkBubbleSort50000(b *testing.B) { //pop up suggestion cause is the only one exported
+	els := getElements(50000)
+	for i := 0; i < b.N; i++ {
+		BubbleSort(els) // 690.6 ns/op
+	}
+}
+
+func BenchmarkSort50000(b *testing.B) { //pop up suggestion cause is the only one exported
+	els := getElements(50000)
+	for i := 0; i < b.N; i++ {
+		sort.Ints(els) //47054 ns/op
 	}
 }
 
 func BenchmarkBubbleSort100000(b *testing.B) { //pop up suggestion cause is the only one exported
 	els := getElements(100000)
 	for i := 0; i < b.N; i++ {
-		BubbleSort(els)
+		//BenchmarkBubbleSort100000-4   	       1	15113150236 ns/op
+		BubbleSort(els) //
 	}
 }
+
+func BenchmarkSort100000(b *testing.B) { //pop up suggestion cause is the only one exported
+	els := getElements(100000)
+	for i := 0; i < b.N; i++ {
+		//BenchmarkSort100000-4   	     154	   7406533 ns/op
+		sort.Ints(els)
+	}
+}
+
+func Sort(els []int) {
+	if len(els) < 50000 {
+		BubbleSort(els)
+		return
+	} else {
+		sort.Ints(els)
+		return
+	}
+}
+
+/*
+Συμπέρασμα: Για λίγα data(κατω απο 1000) η BubbleSort είναι καλύτερη.
+Αλλά για πολλά data η sort.Ints είναι πολύ καλύτερη
+*/
