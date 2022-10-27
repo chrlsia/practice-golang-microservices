@@ -40,6 +40,7 @@ func TestBubbleSortNilSlice(t *testing.T) {
 
 }
 
+//getElements creates a slice of n elements of integers
 func getElements(n int) []int {
 	result := make([]int, n)
 	i := 0
@@ -60,4 +61,11 @@ func TestGetElements(t *testing.T) {
 	assert.EqualValues(t, 1, els[3])
 	assert.EqualValues(t, 0, els[4])
 
+}
+
+func BenchmarkBubbleSort10(b *testing.B) { //pop up suggestion cause is the only one exported
+	els := getElements(10)
+	for i := 0; i < b.N; i++ {
+		BubbleSort(els)
+	}
 }
