@@ -2,7 +2,6 @@ package utils
 
 import (
 	"github.com/stretchr/testify/assert"
-	"sort"
 	"testing"
 )
 
@@ -117,16 +116,6 @@ func BenchmarkSort100000(b *testing.B) { //pop up suggestion cause is the only o
 	els := getElements(100000)
 	for i := 0; i < b.N; i++ {
 		Sort(els)
-	}
-}
-
-func Sort(els []int) {
-	if len(els) < 50000 {
-		BubbleSort(els)
-		return
-	} else {
-		sort.Ints(els)
-		return
 	}
 }
 
